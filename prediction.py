@@ -88,10 +88,10 @@ def custom_loss(y_true, y_pred):
     #return rmse
     
 ## Load the model with custom objects
-transunet_model = load_model(os.path.join(path_exp + 'transunet_model-regressor.keras'), custom_objects={'bounded_relu': bounded_relu, 'custom_loss': custom_loss})
+TransConvRegressor_model = load_model(os.path.join(path_exp + 'TransConvRegressor_model-regressor.keras'), custom_objects={'bounded_relu': bounded_relu, 'custom_loss': custom_loss})
 
 # Predict LAI values
-y_pred = transunet_model.predict(X_test_reshaped)
+y_pred = TransConvRegressor_model.predict(X_test_reshaped)
 y_pred = np.round(y_pred, decimals=3)
 
 print("Shape of X_test_combined_reshaped:", X_test_reshaped.shape)
@@ -134,3 +134,4 @@ df_['LAI_pred'] = y_pred[:len(df_)]  # Ensure alignment with dataframe length
 output_filename = os.path.join(path_val, 'satunet_predicted_with_all_features_2023.csv')
 df_.to_csv(output_filename, index=False)
 print(f"Dataset with predicted LAI saved to: {output_filename}")
+
