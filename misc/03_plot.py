@@ -64,6 +64,6 @@ cbar.set_label("Range of LAI", fontsize=20)
 cbar.set_ticks(np.linspace(0, 8, 9))
 
 # Save
-plot_path = os.path.join(raster_folder, "LAI_Combined_OneRow_MaySep1.png")
+plot_path = os.path.join(raster_folder, "LAI_Combined_MaySep1.png")
 plt.savefig(plot_path, dpi=300, bbox_inches="tight")
-print(f"One-row plot with larger font saved at: {plot_path}")
+print(f"plot with larger font saved at: {plot_path}")
