@@ -34,6 +34,7 @@ python train.py
 ## Prediction
 python prediction.py
 - This script loads the trained model, performs inference on the test data, and saves the predicted LAI values along with additional information to CSV files.
-<img width="3876" height="2071" alt="image" src="https://github.com/user-attachments/assets/9815cae6-0b79-4aee-a3f1-29df30c1ada3" />
+- 
+<img width="3876" height="2071" alt="image" src="https://github.com/user-attachments/assets/3dcfb8f6-7d3e-4c62-8eed-91dad10f5d5b" />
 
 
