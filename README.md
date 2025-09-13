@@ -2,6 +2,9 @@
 
 This repository implements **TransConvRegressor**, a 1D TransUNet-based regressor for **Leaf Area Index (LAI)** estimation using temporal Sentinel-1 backscatter signals and ancillary features. It includes training, evaluation, and prediction pipelines.
 
+<img width="3919" height="1470" alt="image" src="https://github.com/user-attachments/assets/f9de8c09-1b3e-4b2a-a651-179af88a4919" />
+
+
 ## 📂 Repository Structure
 - **network.py**: Contains the `model` function and helper functions for building the 1D TransConvRegressor model.
 - **train.py**: Loads data, applies preprocessing, creates train/val/test splits, trains the model, saves the model, scaler and evaluation metrics.
