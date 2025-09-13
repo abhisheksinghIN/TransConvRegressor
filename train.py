@@ -14,7 +14,7 @@ from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.optimizers import Adam
 from tensorflow.keras.models import load_model
 
-from network import transunet, custom_loss, bounded_relu
+from network import TransConvRegressor, custom_loss, bounded_relu
 # --------------------------- Paths ---------------------------
 path = "./workspace/"
 filename_database = path + "database_2023-SM.csv"
@@ -166,21 +166,21 @@ X_test_reshaped = reshape_for_cnn(X_test)
 
 #************************************************ Model ********************************************************
 input_shape_combined = (X_train_reshaped.shape[1], 1)
-# Create the TransUNet model
-transunet_model = transunet(input_shape_combined)
-transunet_model.compile(optimizer=Adam(learning_rate=0.0001), loss=custom_loss)
+# Create the TransConvRegressor model
+TransConvRegressor_model = TransConvRegressor(input_shape_combined)
+TransConvRegressor_model.compile(optimizer=Adam(learning_rate=0.0001), loss=custom_loss)
 
 # Save model summary
-summary_file = os.path.join(path_exp, "transunet_model_summary.txt")
+summary_file = os.path.join(path_exp, "TransConvRegressor_model_summary.txt")
 with open(summary_file, "w") as file:
-    transunet_model.summary(print_fn=lambda x: file.write(x + "\n"))
+    TransConvRegressor_model.summary(print_fn=lambda x: file.write(x + "\n"))
 print(f"Model summary saved to {summary_file}")
 
 # ---------------- Training ----------------
 early_stopping = EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
 
 start_time = time()
-history1 = transunet_model.fit(
+history1 = TransConvRegressor_model.fit(
     X_train_reshaped, y_train,
     validation_data=(X_val_reshaped, y_val),
     epochs=1, batch_size=128, callbacks=[early_stopping]
@@ -189,11 +189,11 @@ elapsed_time = time() - start_time
 elapsed_time = f"{elapsed_time:.3f}"
 
 # Save trained model
-transunet_model.save(os.path.join(path_exp, 'transunet_model-regressor.keras'))
-print("transunet_model saved as transunet_model-regressor.keras")
+TransConvRegressor_model.save(os.path.join(path_exp, 'TransConvRegressor_model-regressor.keras'))
+print("TransConvRegressor_model saved as TransConvRegressor_model-regressor.keras")
 
 # save training history to text file
-history_file = os.path.join(path_exp, "transunet-model_training_history.txt")
+history_file = os.path.join(path_exp, "TransConvRegressor-model_training_history.txt")
 with open(history_file, "w") as file:
     file.write("Training History\n")
     file.write("=================\n")
@@ -204,9 +204,9 @@ print(f"Training history saved to {history_file}")
 
 # ---------------- Evaluation ----------------
 ## Load the model with custom objects (demonstrates recovering later)
-#transunet_model = load_model(os.path.join(path_exp, 'transunet_model-regressor.keras'), custom_objects={'bounded_relu': bounded_relu, 'custom_loss': custom_loss})
+#TransConvRegressor_model = load_model(os.path.join(path_exp, 'TransConvRegressor_model-regressor.keras'), custom_objects={'bounded_relu': bounded_relu, 'custom_loss': custom_loss})
 # Predict LAI values
-y_pred = transunet_model.predict(X_test_reshaped)
+y_pred = TransConvRegressor_model.predict(X_test_reshaped)
 y_pred = y_pred.squeeze()
 
 r2 = r2_score(y_test, y_pred)
@@ -356,3 +356,4 @@ boxplot_fig.tight_layout()
 boxplot_fig.savefig(boxplot_file, dpi=300)
 print(f"Date-wise boxplot saved to {boxplot_file}")
 plt.close(boxplot_fig)
+
