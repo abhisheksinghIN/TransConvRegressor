@@ -55,8 +55,8 @@ def crop_to_match(a, b):
 
 
 # ----------------- Model -----------------
-def transunet(input_shape):
-    """1D TransUNet for regression."""
+def TransConvRegressor(input_shape):
+    """1D TransConvRegressor for regression."""
     inputs = Input(shape=input_shape)
 
     # Encoder
@@ -127,4 +127,5 @@ def transunet(input_shape):
 def custom_loss(y_true, y_pred):
     mae = tf.keras.losses.MeanAbsoluteError()(y_true, y_pred)
     rmse = tf.sqrt(tf.keras.losses.MeanSquaredError()(y_true, y_pred))
+
     return 0.6 * mae + 0.4 * rmse
