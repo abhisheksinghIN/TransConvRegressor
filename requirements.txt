@@ -1,7 +1,9 @@
-tensorflow
-scikit-learn
-numpy
+tensorflow==2.17.0
+scikit-learn==1.6.1
+numpy==1.26.4
 pandas
-matplotlib
+matplotlib==3.7.1
 seaborn
 joblib
+
+
