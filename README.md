@@ -2,7 +2,7 @@
 
 This repository implements **TransConvRegressor**, a 1D TransUNet-based regressor for **Leaf Area Index (LAI)** estimation using temporal Sentinel-1 backscatter signals and ancillary features. It includes training, evaluation, and prediction pipelines.
 
-# Model Architecture
+- Model Architecture
 The core model is a 1D Transformer-based architecture, combining convolutional layers with transformer-based attention mechanisms to capture spatial and temporal dependencies in the Sentinel-1 backscatter signals.
 <img width="3919" height="1470" alt="image" src="https://github.com/user-attachments/assets/f9de8c09-1b3e-4b2a-a651-179af88a4919" />
 
@@ -14,7 +14,7 @@ The core model is a 1D Transformer-based architecture, combining convolutional l
 - **prediction.py**: Loads the trained model, applies preprocessing, makes predictions on new data and saves outputs.
 - **requirements.txt**: Lists all Python packages required to run the scripts.
 
-# Data Description
+## Data Description
 - S1 SAR (RTC): We downloaded the S1 RTC from the Microsoft Planetary Computer as netcdfs. RTC is radiometrically terrain corrected GRD data, to account for radiometrics effects resulting from the topography.
 - Sentinel-2 derived LAI: We computed LAI from the S2 L2A files over selected years and tiles using the SNAP Biophysical Processor.
 - Soil Moisture: We considered Surface Soil Moisture based on a combination of SAR and optical imagery [1]. We simulated the required soil moisture data over the AOI.
